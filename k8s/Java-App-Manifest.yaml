@@ -23,7 +23,7 @@ spec:
       containers:
       - image: ${ECR_PRIVATE_REPO_LINK}/${ECR_REPO_NAME}:JAVA-APP-v${BUILD_NUMBER}
         imagePullPolicy: IfNotPresent
-        name: JAVA-APP-POD
+        name: java-app-pod
       dnsPolicy: ClusterFirst
       imagePullSecrets:
       - name: docker-secret
