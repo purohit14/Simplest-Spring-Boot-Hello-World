@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: java-app-deploy
+  name: java-app-deploy
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: java-app-deploy
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: java-app-deploy
+    spec:
+      containers:
+      - image: ${ECR_PRIVATE_REPO_LINK}/${ECR_REPO_NAME}:JAVA-APP-v${BUILD_NUMBER}
+        imagePullPolicy: IfNotPresent
+        name: JAVA-APP-POD
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: docker-secret
+      
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: java-app-deploy
+  name: java-app-deploy
+  namespace: default
+spec:
+  ports:
+  - port: 9092
+    protocol: TCP
+    targetPort: 9092
+  selector:
+    app: java-app-deploy
