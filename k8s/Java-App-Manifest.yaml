@@ -21,7 +21,7 @@ spec:
         app: java-app-deploy
     spec:
       containers:
-      - image: ${ECR_PRIVATE_REPO_LINK}/${ECR_REPO_NAME}:JAVA-APP-v${BUILD_NUMBER}
+      - image: DOCKER_IMAGE
         imagePullPolicy: IfNotPresent
         name: java-app-pod
       dnsPolicy: ClusterFirst
