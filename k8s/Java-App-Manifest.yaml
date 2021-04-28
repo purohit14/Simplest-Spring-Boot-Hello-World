@@ -27,7 +27,8 @@ spec:
       dnsPolicy: ClusterFirst
       imagePullSecrets:
       - name: docker-secret
-      
+
+
 ---
 
 apiVersion: v1
